@@ -18,7 +18,7 @@ public record StudentsRequest(
         String firstName,
 
         @NotBlank(message = "Last Name cannot be blank")
-        @JsonProperty("lastName")
+        @JsonProperty("last_name")
         String lastName,
 
         @NotBlank(message = "Email is required")
@@ -29,7 +29,7 @@ public record StudentsRequest(
         @JsonProperty("cgpa")
         double cgpa,
 
-        @JsonProperty("photographPath")
+        @JsonProperty("photograph_path")
         String photographPath,
 
         @JsonProperty("domain")

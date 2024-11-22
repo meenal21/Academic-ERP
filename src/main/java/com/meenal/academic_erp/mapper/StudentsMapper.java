@@ -2,7 +2,9 @@ package com.meenal.academic_erp.mapper;
 
 import com.meenal.academic_erp.dto.StudentsRequest;
 import com.meenal.academic_erp.entity.Students;
+import org.springframework.stereotype.Service;
 
+@Service
 public class StudentsMapper {
 
     public Students toStudents(StudentsRequest req) {
