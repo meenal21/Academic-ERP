@@ -1,7 +1,6 @@
 package com.meenal.academic_erp.entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,7 +14,7 @@ import java.util.Date;
 @NoArgsConstructor
 @Entity
 @Table(name="Students")
-public class Student {
+public class Students {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -44,7 +43,7 @@ public class Student {
     private String domain;
 
     @Column(name = "total_credits")
-    private float totalCredits;
+    private double totalCredits;
 
     @Column(name = "graduation_year")
     private Date graduationYear;

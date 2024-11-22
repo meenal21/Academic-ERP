@@ -9,6 +9,10 @@ import jakarta.validation.constraints.NotNull;
 import java.util.Date;
 
 public record StudentsRequest(
+        @NotBlank(message="Roll Number cannot be blank")
+        @JsonProperty("rollNumber")
+        String rollNumber,
+
         @NotBlank(message="First Name cannot be blank")
         @JsonProperty("firstName")
         String firstName,
