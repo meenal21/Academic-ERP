@@ -8,11 +8,11 @@ import java.util.Date;
 
 public record StudentRequest(
         @NotBlank(message="Roll Number cannot be blank")
-        @JsonProperty("rollNumber")
+        @JsonProperty("roll_number")
         String rollNumber,
 
         @NotBlank(message="First Name cannot be blank")
-        @JsonProperty("firstName")
+        @JsonProperty("first_name")
         String firstName,
 
         @NotBlank(message = "Last Name cannot be blank")
@@ -33,10 +33,10 @@ public record StudentRequest(
         @JsonProperty("domain")
         String domain,
 
-        @JsonProperty("totalCredits")
+        @JsonProperty("total_credits")
         double totalCredits,
 
-        @JsonProperty("graduationYear")
+        @JsonProperty("graduation_year")
         Date graduationYear
 ) {
 }
