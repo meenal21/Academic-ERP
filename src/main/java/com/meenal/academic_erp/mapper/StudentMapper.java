@@ -10,7 +10,7 @@ import java.util.List;
 
 
 @Service
-public class StudentsMapper {
+public class StudentMapper {
 
     //in studentRequest - we can directly get any element using named function to get the data
     public Students toStudents(StudentRequest req) {
