@@ -29,7 +29,6 @@ public class StudentService {
         return jwtHelper.validateToken(token);
     }
 
-    public String loginAdmin(@Valid )
 
     public String createStudent(StudentRequest req) {
         Students studentsList = mapper.toStudents(req);

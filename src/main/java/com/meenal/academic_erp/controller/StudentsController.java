@@ -18,6 +18,7 @@ public class StudentsController {
     private final StudentService studentService;
 
     // do I want the auth during creating a student?
+
     @PostMapping
     public ResponseEntity<String> createStudent(@RequestBody @Valid StudentRequest req){
         return ResponseEntity.ok(studentService.createStudent(req));
