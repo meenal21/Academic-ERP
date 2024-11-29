@@ -7,6 +7,7 @@ import com.meenal.academic_erp.entity.Specialisation;
 import lombok.Builder;
 
 import java.util.Date;
+import java.util.List;
 
 @Builder
 public record StudentResponse(
@@ -41,7 +42,9 @@ public record StudentResponse(
         Domain domain,
 
         @JsonProperty("placement_id")
-        Placement placement_id
+        Placement placement_id,
 
+        @JsonProperty("education_list")
+        List<EducationDTO> education_details
 ){
 }

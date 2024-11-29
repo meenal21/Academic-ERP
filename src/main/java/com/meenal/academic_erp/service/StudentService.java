@@ -7,6 +7,7 @@ import com.meenal.academic_erp.entity.Placement;
 import com.meenal.academic_erp.entity.Specialisation;
 import com.meenal.academic_erp.entity.Students;
 import com.meenal.academic_erp.helper.JWTHelper;
+import com.meenal.academic_erp.mapper.EducationMapper;
 import com.meenal.academic_erp.mapper.StudentMapper;
 import com.meenal.academic_erp.repo.DomainRepo;
 import com.meenal.academic_erp.repo.PlacementRepo;
@@ -23,6 +24,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class StudentService {
 
+    private final EducationMapper educationMapper;
     private final StudentsRepo repo;
     private final DomainRepo domainRepo;
     private final SpecialisationRepo specialisationRepo;
@@ -31,6 +33,7 @@ public class StudentService {
     private final JWTHelper jwtHelper;
     private final PasswordEncoder passwordEncoder;
     private final StudentMapper mapper;
+    private final StudentMapper studentMapper;
 
     public boolean validateToken(String auth_token) {
         //since the token comes in the form of Bearer way - so need to extract the substring and then get the next part
@@ -61,7 +64,8 @@ public class StudentService {
                 student.getGraduationYear(),
                 student.getSpecialisation(),
                 student.getDomain(),
-                student.getPlacement()
+                student.getPlacement(),
+                educationMapper.toEducationDTOList(student.getEducationList())
                 );
         return resp;
     }
@@ -87,6 +91,7 @@ public class StudentService {
         student.setSpecialisation(req.specialisation());
         student.setPlacement(req.placement());
         student.setDomain(req.domain());
+        student.setEducationList(educationMapper.toEducationList(req.educationDTOList()));
         repo.save(student);
         return "updated";
     }

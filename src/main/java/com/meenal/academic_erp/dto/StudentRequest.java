@@ -8,6 +8,7 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 
 import java.util.Date;
+import java.util.List;
 
 public record StudentRequest(
         @NotBlank(message="Roll Number cannot be blank")
@@ -46,6 +47,9 @@ public record StudentRequest(
         Specialisation specialisation,
 
         @JsonProperty("placement_id")
-        Placement placement
+        Placement placement,
+
+        @JsonProperty("education_details")
+        List<EducationDTO> educationDTOList
 ) {
 }

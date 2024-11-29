@@ -13,7 +13,6 @@ import lombok.NoArgsConstructor;
 @Builder
 @Table(name="domain")
 public class Domain {
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long domain_id;

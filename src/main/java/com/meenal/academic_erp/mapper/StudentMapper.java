@@ -6,6 +6,7 @@ import com.meenal.academic_erp.entity.Domain;
 import com.meenal.academic_erp.entity.Placement;
 import com.meenal.academic_erp.entity.Specialisation;
 import com.meenal.academic_erp.entity.Students;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -13,7 +14,10 @@ import java.util.List;
 
 
 @Service
+@RequiredArgsConstructor
 public class StudentMapper {
+
+    private final EducationMapper educationMapper;
 
     //in studentRequest - we can directly get any element using named function to get the data
     public Students toStudents(StudentRequest req, Domain domain, Placement placement, Specialisation specialisation) {
@@ -29,6 +33,7 @@ public class StudentMapper {
                 .photographPath(req.photographPath())
                 .totalCredits(req.totalCredits())
                 .graduationYear(req.graduationYear())
+                .educationList(educationMapper.toEducationList(req.educationDTOList()))
                 .build();
     }
 
@@ -48,6 +53,7 @@ public class StudentMapper {
                 .photographPath(students.getPhotographPath())
                 .totalCredits(students.getTotalCredits())
                 .graduationYear(students.getGraduationYear())
+                .education_details(educationMapper.toEducationDTOList(students.getEducationList()))
                 .build();
     }
 
