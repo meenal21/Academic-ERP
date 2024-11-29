@@ -4,5 +4,5 @@ import com.meenal.academic_erp.entity.Students;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface StudentsRepo extends JpaRepository<Students, Long> {
-    public Students findStudentsByRollNumber(String rollNumber);
+    public Students findStudentsByEmail(String email);
 }

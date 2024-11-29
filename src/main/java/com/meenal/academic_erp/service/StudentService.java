@@ -36,8 +36,8 @@ public class StudentService {
         return "created";
     }
 
-    public StudentResponse getStudents(String rollNumber) {
-        Students student = repo.findStudentsByRollNumber(rollNumber);
+    public StudentResponse getStudents(String email) {
+        Students student = repo.findStudentsByEmail(email);
         StudentResponse resp = new StudentResponse(student.getRollNumber(), student.getFirstName(), student.getLastName(), student.getEmail(), student.getCgpa(), student.getDomain(), student.getPhotographPath(), student.getTotalCredits(), student.getGraduationYear());
         return resp;
     }
@@ -48,11 +48,20 @@ public class StudentService {
     public List<StudentResponse> getAllStudents() {
         return mapper.toStudentResponseList(repo.findAll());
     }
-    /*
-    public String updateStudent(StudentRequest req) {
-        // I have studentrequest and I have to fetch student using email
-        //
-        // }
 
-     */
+    public String updateStudent(StudentRequest req) {
+        Students student = repo.findStudentsByEmail(req.email());
+        student.setEmail(req.email());
+        student.setFirstName(req.firstName());
+        student.setLastName(req.lastName());
+        student.setCgpa(req.cgpa());
+        student.setDomain(req.domain());
+        student.setPhotographPath(req.photographPath());
+        student.setTotalCredits(req.totalCredits());
+        student.setGraduationYear(req.graduationYear());
+        repo.save(student);
+        return "updated";
+    }
+
+
 }

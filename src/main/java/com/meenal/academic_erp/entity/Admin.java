@@ -20,7 +20,7 @@ public class Admin {
     @Column(name = "email", nullable = false, unique = true)
     private String email;
 
-    @Column(name = "userName", nullable = false, unique = true )
+    @Column(name = "user_name", nullable = false, unique = true )
     private String userName;
 
     @Column(name = "password", nullable= false, unique = true )

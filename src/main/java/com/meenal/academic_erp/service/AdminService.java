@@ -43,6 +43,7 @@ public class AdminService {
 
     public String createAdmin(AdminRequest request){
         Admin admin = adminMapper.toAdmin(request);
+        admin.setPassword(passwordEncoder.encode(admin.getPassword()));
         adminRepo.save(admin);
         return "created";
     }

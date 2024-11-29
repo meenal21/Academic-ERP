@@ -10,17 +10,17 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/ap1/v1/admin")
+@RequestMapping("/api/v1/admin")
 public class AdminController {
 
     private final AdminService adminService;
 
     @PostMapping("/login")
-    public ResponseEntity<String> loginAdmin(@RequestBody @Valid AdminLoginRequest request, @RequestHeader("Authorization") String token){
-        if(adminService.tokenValidate(token)){
+    public ResponseEntity<String> loginAdmin(@RequestBody @Valid AdminLoginRequest request){
+//        if(adminService.tokenValidate(token)){
             return ResponseEntity.ok(adminService.loginAdmin(request));
-        }
-        return ResponseEntity.notFound().build();
+//        }
+//        return ResponseEntity.notFound().build();
     }
 
     @PostMapping("/createuser")

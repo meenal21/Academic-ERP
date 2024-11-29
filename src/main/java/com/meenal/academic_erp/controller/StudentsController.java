@@ -26,7 +26,7 @@ public class StudentsController {
 
     // yes here I need the token!!!
     @GetMapping("/{email}")
-    public ResponseEntity<StudentResponse> getStudents(@PathVariable("email") String email, @RequestHeader("Authorization") String token){
+    public ResponseEntity<StudentResponse> getStudents(@PathVariable("email") String email){
         return ResponseEntity.ok(studentService.getStudents(email));
     }
 
@@ -37,10 +37,11 @@ public class StudentsController {
     public ResponseEntity<List<StudentResponse>> getAllStudents(){
         return ResponseEntity.ok(studentService.getAllStudents());
     }
-    /*
+
     @PutMapping("/update")
     public ResponseEntity<String> updateStudent(@RequestBody @Valid StudentRequest req){
         return ResponseEntity.ok(studentService.updateStudent(req));
     }
-     */
+
+
 }
