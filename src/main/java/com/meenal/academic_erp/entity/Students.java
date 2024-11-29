@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
+import java.util.List;
 
 @Data
 @Builder
@@ -58,4 +59,9 @@ public class Students {
     @ManyToOne(optional = true)
     @JoinColumn(name = "placement_id", nullable = true, referencedColumnName = "id", foreignKey = @ForeignKey(name = "FK_studentPlacement"))
     private Placement placement;
+
+
+    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Education> educationList;
+
 }

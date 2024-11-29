@@ -20,9 +20,6 @@ public class Education {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @Column(name = "student_id", nullable = false)
-    private String studentId;
-
     @Column(name = "education_type", nullable = false)
     private String educationType;
 
@@ -34,4 +31,9 @@ public class Education {
 
     @Column(name = "school_name")
     private String schoolName;
+
+    // Many-to-One relationship to Students
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "student_id", referencedColumnName = "student_id", nullable = false)
+    private Students student;
 }

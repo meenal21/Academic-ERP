@@ -84,6 +84,9 @@ public class StudentService {
         student.setPhotographPath(req.photographPath());
         student.setTotalCredits(req.totalCredits());
         student.setGraduationYear(req.graduationYear());
+        student.setSpecialisation(req.specialisation());
+        student.setPlacement(req.placement());
+        student.setDomain(req.domain());
         repo.save(student);
         return "updated";
     }
