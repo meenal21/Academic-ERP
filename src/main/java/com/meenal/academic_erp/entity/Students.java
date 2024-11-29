@@ -39,15 +39,23 @@ public class Students {
     @Column(name = "cgpa")
     private double cgpa;
 
-    @Column(name = "domain")
-    private String domain;
-
     @Column(name = "total_credits")
     private double totalCredits;
 
     @Column(name = "graduation_year")
-    private Date graduationYear;
+    private String graduationYear;
 
+    @ManyToOne(optional = true)
+    @JoinColumn(name = "domain", nullable = true, referencedColumnName = "domain_id", foreignKey = @ForeignKey(name = "FK_studentDomain"))
+    private Domain domain;
 
+    // Relationship to Specialisation
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "specialisation", nullable = true, referencedColumnName = "specialisation_id", foreignKey = @ForeignKey(name = "FK_studentSpecialisation"))
+    private Specialisation specialisation;
 
+    // Relationship to Placement
+    @ManyToOne(optional = true)
+    @JoinColumn(name = "placement_id", nullable = true, referencedColumnName = "id", foreignKey = @ForeignKey(name = "FK_studentPlacement"))
+    private Placement placement;
 }

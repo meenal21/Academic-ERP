@@ -43,5 +43,4 @@ public class StudentsController {
         return ResponseEntity.ok(studentService.updateStudent(req));
     }
 
-
 }

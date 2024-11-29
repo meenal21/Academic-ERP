@@ -2,9 +2,15 @@ package com.meenal.academic_erp.service;
 
 import com.meenal.academic_erp.dto.StudentResponse;
 import com.meenal.academic_erp.dto.StudentRequest;
+import com.meenal.academic_erp.entity.Domain;
+import com.meenal.academic_erp.entity.Placement;
+import com.meenal.academic_erp.entity.Specialisation;
 import com.meenal.academic_erp.entity.Students;
 import com.meenal.academic_erp.helper.JWTHelper;
 import com.meenal.academic_erp.mapper.StudentMapper;
+import com.meenal.academic_erp.repo.DomainRepo;
+import com.meenal.academic_erp.repo.PlacementRepo;
+import com.meenal.academic_erp.repo.SpecialisationRepo;
 import com.meenal.academic_erp.repo.StudentsRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -18,6 +24,9 @@ import java.util.List;
 public class StudentService {
 
     private final StudentsRepo repo;
+    private final DomainRepo domainRepo;
+    private final SpecialisationRepo specialisationRepo;
+    private final PlacementRepo placementRepo;
     //for the custom queries and fetching data from the database
     private final JWTHelper jwtHelper;
     private final PasswordEncoder passwordEncoder;
@@ -31,14 +40,29 @@ public class StudentService {
 
 
     public String createStudent(StudentRequest req) {
-        Students studentsList = mapper.toStudents(req);
+        Domain domain  = domainRepo.findById(req.domain().getDomain_id()).orElse(null);
+        Specialisation specialisation = specialisationRepo.findById(req.specialisation().getSpecialisation_id()).orElse(null);
+        Placement placement = placementRepo.findById(req.placement().getId()).orElse(null);
+        Students studentsList = mapper.toStudents(req, domain, placement, specialisation);
         repo.save(studentsList);
         return "created";
     }
 
     public StudentResponse getStudents(String email) {
         Students student = repo.findStudentsByEmail(email);
-        StudentResponse resp = new StudentResponse(student.getRollNumber(), student.getFirstName(), student.getLastName(), student.getEmail(), student.getCgpa(), student.getDomain(), student.getPhotographPath(), student.getTotalCredits(), student.getGraduationYear());
+        StudentResponse resp = new StudentResponse(
+                student.getRollNumber(),
+                student.getFirstName(),
+                student.getLastName(),
+                student.getEmail(),
+                student.getCgpa(),
+                student.getPhotographPath(),
+                student.getTotalCredits(),
+                student.getGraduationYear(),
+                student.getSpecialisation(),
+                student.getDomain(),
+                student.getPlacement()
+                );
         return resp;
     }
 
@@ -46,7 +70,8 @@ public class StudentService {
     //new mapper created - toStudentsResponse
 
     public List<StudentResponse> getAllStudents() {
-        return mapper.toStudentResponseList(repo.findAll());
+        List<Students> students = repo.findAll();
+        return mapper.toStudentResponseList(students);
     }
 
     public String updateStudent(StudentRequest req) {

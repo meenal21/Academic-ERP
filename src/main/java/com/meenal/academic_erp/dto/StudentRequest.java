@@ -1,6 +1,9 @@
 package com.meenal.academic_erp.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.meenal.academic_erp.entity.Domain;
+import com.meenal.academic_erp.entity.Placement;
+import com.meenal.academic_erp.entity.Specialisation;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 
@@ -30,13 +33,19 @@ public record StudentRequest(
         @JsonProperty("photographPath")
         String photographPath,
 
-        @JsonProperty("domain")
-        String domain,
-
         @JsonProperty("totalCredits")
         double totalCredits,
 
         @JsonProperty("graduationYear")
-        Date graduationYear
+        String graduationYear,
+
+        @JsonProperty("domain")
+        Domain domain,
+
+        @JsonProperty("specialisation")
+        Specialisation specialisation,
+
+        @JsonProperty("placement_id")
+        Placement placement
 ) {
 }
